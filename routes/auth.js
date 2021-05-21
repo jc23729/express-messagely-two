@@ -1,47 +1,42 @@
+const jwt = require("jsonwebtoken");
+const Router = require("express").Router;
+const router = new Router();
 
-/** POST /login - login: {username, password} => {token}
- *
- * Make sure to update their last-login!
- *
- **/
+const User = require("../models/user");
+const { SECRET_KEY } = require("../config");
+const ExpressError = require("../expressError");
 
-// Using JWTs in Express
-// Login
-// demo/auth-api/routes/auth.jS
-
-
-// /** (Fixed) Login: returns JWT on success. */
+/** login: {username, password} => {token} */
 
 router.post("/login", async function (req, res, next) {
   try {
-    const { username, password } = req.body;
-    const result = await db.query(
-      "SELECT password FROM users WHERE username = $1",
-      [username]);
-    let user = result.rows[0];
-
-    if (user) {
-      if (await bcrypt.compare(password, user.password) === true) {
-        let token = jwt.sign({ username }, SECRET_KEY);
-        return res.json({ token });
-      }
+    let { username, password } = req.body;
+    if (await User.authenticate(username, password)) {
+      let token = jwt.sign({ username }, SECRET_KEY);
+      User.updateLoginTimestamp(username);
+      return res.json({ token });
+    } else {
+      throw new ExpressError("Invalid username/password", 400);
     }
-    throw new ExpressError("Invalid user/password", 400);
   } catch (err) {
     return next(err);
   }
 });
 
-
-
-
-
-
-
-
-/** POST /register - register user: registers, logs in, and returns token.
+/** register user: registers, logs in, and returns token.
  *
  * {username, password, first_name, last_name, phone} => {token}.
- *
- *  Make sure to update their last-login!
  */
+
+router.post("/register", async function (req, res, next) {
+  try {
+    let { username } = await User.register(req.body);
+    let token = jwt.sign({ username }, SECRET_KEY);
+    User.updateLoginTimestamp(username);
+    return res.json({ token });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+module.exports = router;
