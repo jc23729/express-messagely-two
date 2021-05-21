@@ -39,4 +39,17 @@ router.post("/register", async function (req, res, next) {
   }
 });
 
+//Put these credentials in your register route in postman
+// {
+//    "username" : "Johnny",
+//    "password": "password",
+//    "first_name": "Juan",
+//    "last_name": "Cruz",
+//    "phone": "917-243-6675"
+// }
+
+// {
+//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTYzMDY2Mn0.505vknfXRFJEs29acObFNvKA28K_Sk4DSpzlylUX4ac"
+// }
+
 module.exports = router;
