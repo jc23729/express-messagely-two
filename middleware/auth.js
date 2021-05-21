@@ -3,6 +3,24 @@
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 
+
+// We setup a token and sign it, with a username and secret key
+// > const myToken = jwt.sign({username: "Toddd"}, 'adsfdfewfsdfds')
+// Undefined
+
+// We bring that token over to the website and it gives us a token
+// > myToken
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvZGRkIiwiaWF0IjoxNjIxNjE3OTIxfQ.jqxSn4Du0GoQewHosESF06cgBEiej4EnFDk4m7tSSzM'
+
+// We setup a variable by the name of reqToken or whatever we want to call it. 
+// > const reqToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRvZGRkIiwiaWF0IjoxNjIxNjE3OTIxfQ.jqxSn4Du0GoQewHosESF06cgBEiej4EnFDk4m7tSSzM'
+
+// We can now verify that token any time someone logs in wit the correct username, and whatever secret key they used previously
+// > jwt.verify(reqToken, 'adsfdfewfsdfds')
+// { username: 'Toddd', iat: 1621617921 }
+
+
+
 /** Middleware: Authenticate user. */
 
 function authenticateJWT(req, res, next) {
