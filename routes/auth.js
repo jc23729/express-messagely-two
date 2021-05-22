@@ -38,6 +38,13 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
+
+//token to be used in insomnia
+// {
+//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTcwNzYwM30.HfnE_D-U9Gy8SwDwDuI91hZOcskwCii1im00515htvc"
+// }
+
+
 /////////////////////////////////////// Using JWTs in Express////////////////////////
 // Login Route from VideoCode and also notes
 // demo / auth - api / routes / auth.js
