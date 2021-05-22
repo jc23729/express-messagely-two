@@ -6,25 +6,22 @@ const User = require("../models/user");
 const { SECRET_KEY } = require("../config");
 const ExpressError = require("../expressError");
 
-/** login: {username, password} => {token} */
+
+
+
+
+//////////////////////////////LOGIN ROUTE////////////////////////////////////////////////////////////////
+
+/** login: { username, password } => { token } * /
+ * 
+ * 
 
 //  http://localhost:3000/auth/login
 // This format in insomnia will give us a token then log us in {username, password} => {token}
 
-router.post("/login", async function (req, res, next) {
-  try {
-    let { username, password } = req.body;
-    if (await User.authenticate(username, password)) {
-      let token = jwt.sign({ username }, SECRET_KEY);
-      User.updateLoginTimestamp(username);
-      return res.json({ token });
-    } else {
-      throw new ExpressError("Invalid username/password", 400);
-    }
-  } catch (err) {
-    return next(err);
-  }
-});
+//Example Code
+
+
 
 ////////////////////////REGISTER ROUTE///////////////////////////////////////////
 
