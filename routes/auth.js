@@ -51,6 +51,14 @@ router.post("/login", async function (req, res, next) {
 // {
 //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTYzMDY2Mn0.505vknfXRFJEs29acObFNvKA28K_Sk4DSpzlylUX4ac"
 // }
+// JWTs can store any arbitrary “payload” of info, which are “signed” using a secret key, so they can be validated later (similar to Flask’s session).
+// The JWT token itself is a string comprising three parts:
+// •	Header: metadata about token (signing algorithm used & type of token)
+// •	Payload: data to be stored in token (typically an object)
+// •	Often, this will store things like the user ID
+// •	This is encoded, not encrypted — don’t put secret info here!
+// •	Signature: version of header & payload, signed with secret key
+// •	Uses algorithm specified in header (we’ll use default, “HMAC-SHA256”)
 
 router.post("/register", async function (req, res, next) {
   try {
