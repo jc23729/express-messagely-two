@@ -57,17 +57,11 @@ router.get("/secret-1", async function (req, res, next) {
     //if we need access to that data, this would be the actual payload
     const data = jwt.verify(tokenFromBody, SECRET_KEY);
 
-    return res.json({ message: "Made it!" });
-  }
-
-  catch (err) {
+    return res.json({ message: "I mangaged to sing in this is Top Secret, I LIKE RED!" });
+  } catch (err) {
     return next({ status: 401, message: "Unauthorized" });
   }
 });
-
-
-
-
 
 /////////////////////////////////////// Using JWTs in Express////////////////////////
 // Login Route from VideoCode and also notes
