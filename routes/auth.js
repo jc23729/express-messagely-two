@@ -28,6 +28,9 @@ router.post("/login", async function (req, res, next) {
  * {username, password, first_name, last_name, phone} => {token}.
  */
 
+
+// So usually the first route should be a register route, so you can regester a user, then they can log back in the future. 
+
 router.post("/register", async function (req, res, next) {
   try {
     let { username } = await User.register(req.body);
