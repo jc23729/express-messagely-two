@@ -22,6 +22,20 @@ const ExpressError = require("../expressError");
 //    "phone": "917-243-6675"
 // }
 
+
+///////////////////JWT Commands////////////////////////////////
+// Decoding / Verifying Tokens
+// jwt.decode(token)
+// Return the payload from the token (works without secret key. Remember, the tokens are signed, not enciphered!)
+// jwt.verify(token, secret-key)
+// Verify token signature and return payload is valid. If not, raise error.
+// jwt.decode(token);               // {username: "jane"}
+
+// jwt.verify(token, SECRET_KEY);   // {username: "jane"}
+
+// jwt.verify(token, "WRONG");      // error!
+////////////////////////////////////////////////////////////////
+
 router.post("/login", async function (req, res, next) {
   try {
     let { username, password } = req.body;
