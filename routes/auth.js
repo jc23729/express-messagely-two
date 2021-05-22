@@ -6,22 +6,81 @@ const User = require("../models/user");
 const { SECRET_KEY } = require("../config");
 const ExpressError = require("../expressError");
 
+//////////////////////////LOGIN ROUTE////////////////////////////////////////////////////////////////
+//Using JWT in Express
 
-
-
-
-//////////////////////////////LOGIN ROUTE////////////////////////////////////////////////////////////////
-
-/** login: { username, password } => { token } * /
- * 
- * 
+// login: { username, password } => { token }
 
 //  http://localhost:3000/auth/login
 // This format in insomnia will give us a token then log us in {username, password} => {token}
 
-//Example Code
+router.post("/login", async function (req, res, next) {
+  try {
+    let { username, password } = req.body;
+    if (await User.authenticate(username, password)) {
+      //we pass in some payload and use a secret key which is in our config.js file const SECRET_KEY = process.env.SECRET_KEY || "secret";
+      let token = jwt.sign({ username }, SECRET_KEY);
+      User.updateLoginTimestamp(username);
+      return res.json({ token });
+    } else {
+      throw new ExpressError("Invalid username/password", 400);
+    }
+  } catch (err) {
+    return next(err);
+  }
+});
 
+/////////////////////////////////////// Using JWTs in Express////////////////////////
+// Login
+// demo / auth - api / routes / auth.js
 
+/** (Fixed) Login: returns JWT on success. */
+
+// router.post("/login", async function (req, res, next) {
+//   try {
+//     const { username, password } = req.body;
+//     const result = await db.query(
+//       "SELECT password FROM users WHERE username = $1",
+//       [username]);
+//     let user = result.rows[0];
+
+//     if (user) {
+//       if (await bcrypt.compare(password, user.password) === true) {
+//         let token = jwt.sign({ username }, SECRET_KEY);
+//         return res.json({ token });
+//       }
+//     }
+//     throw new ExpressError("Invalid user/password", 400);
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
+
+///EXAMPLE CODE//
+
+// router.post("/login-1", async function (req, res, next) {
+//   try {
+//     //Try to find user first in that database
+//     const { username, password } = req.body;
+//     const result = await db.query(
+//       `SELECT password FROM users WHERE username = $1`,
+//       [username]
+//     );
+//     const user = result.rows[0];
+//     //if (user)exists, compare hashed password to hash of login password
+//     if (user) {
+//       //bcrypt.compare() resolves to boolean—if true, Did we correctly authenticate them?
+//       if ((await bcrypt.compare(password, user.password)) === true) {
+//         //passwords match!
+//this is just returning saying that we logged in and creating that token
+//         return res.json({ message: "Logged in!" });
+//       }
+//     }
+//     throw new ExpressError("Invalid user/password", 400);
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
 
 ////////////////////////REGISTER ROUTE///////////////////////////////////////////
 
@@ -74,7 +133,6 @@ router.post("/register", async function (req, res, next) {
     return next(err);
   }
 });
-
 
 ////////////////////MODELS///////////////////////////////////
 //MODELS/users.js
