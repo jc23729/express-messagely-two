@@ -31,6 +31,10 @@ router.post("/login", async function (req, res, next) {
 
 // So usually the first route should be a register route, so you can regester a user, then they can log back in the future. 
 
+// The route would be the actual folder file so auth.js would be auth/ and then the actual route register
+// Actual route you would be put in insomnia would be http://localhost:3000/auth/register
+
+
 router.post("/register", async function (req, res, next) {
   try {
     let { username } = await User.register(req.body);
