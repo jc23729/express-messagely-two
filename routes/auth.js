@@ -27,6 +27,21 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
+
+
+////////////////////////REGISTER ROUTE///////////////////////////////////////////
+
+
+
+
+
+// So usually the first route should be a register route, so you can regester a user, then they can log back in the future. 
+
+// The route would be the actual folder file so auth.js would be auth/ and then the actual route register
+// Actual route you would be put in insomnia would be http://localhost:3000/auth/register
+
+
+
 /** register user: registers, logs in, and returns token.
  *
  * {username, password, first_name, last_name, phone} => {token}.
@@ -46,19 +61,15 @@ router.post("/login", async function (req, res, next) {
 //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTYzMDY2Mn0.505vknfXRFJEs29acObFNvKA28K_Sk4DSpzlylUX4ac"
 // }
 
-// So usually the first route should be a register route, so you can regester a user, then they can log back in the future. 
-
-// The route would be the actual folder file so auth.js would be auth/ and then the actual route register
-// Actual route you would be put in insomnia would be http://localhost:3000/auth/register
-
 
 router.post("/register", async function (req, res, next) {
-  try {
-    let { username } = await User.register(req.body);
-    let token = jwt.sign({ username }, SECRET_KEY);
-    User.updateLoginTimestamp(username);
-    return res.json({ token });
-  } catch (err) {
+    try {
+      //{ username } is dynamic    "username" : "Johnny",
+      let { username } = await User.register(req.body);
+      let token = jwt.sign({ username }, SECRET_KEY);
+      User.updateLoginTimestamp(username);
+      return res.json({ token });
+    } catch (err) {
     return next(err);
   }
 });
