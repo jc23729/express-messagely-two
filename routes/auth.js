@@ -55,7 +55,8 @@ router.post("/login", async function (req, res, next) {
 router.post("/register", async function (req, res, next) {
   try {
     //{ username } is dynamic    "username" : "Johnny", await User is class in users.js in models/users.js
-    // its pulling this information {username, password, first_name, last_name, phone;}
+    // its pulling this information {username, password, first_name, last_name, phone;} and waiting to make sure that the user is registered
+    //if not then it catches that error and moves on
     let { username } = await User.register(req.body);
     let token = jwt.sign({ username }, SECRET_KEY);
     User.updateLoginTimestamp(username);
@@ -64,6 +65,7 @@ router.post("/register", async function (req, res, next) {
     return next(err);
   }
 });
+
 
 //MODELS/users.js
 // class User {
