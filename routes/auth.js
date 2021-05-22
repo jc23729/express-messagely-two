@@ -29,6 +29,19 @@ router.post("/login", async function (req, res, next) {
  */
 
 
+//Put these credentials in your register route in postman same as above, so basically you create user then it gives you a token
+// {
+//    "username" : "Johnny",
+//    "password": "password",
+//    "first_name": "Juan",
+//    "last_name": "Cruz",
+//    "phone": "917-243-6675"
+// }
+
+// {
+//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTYzMDY2Mn0.505vknfXRFJEs29acObFNvKA28K_Sk4DSpzlylUX4ac"
+// }
+
 // So usually the first route should be a register route, so you can regester a user, then they can log back in the future. 
 
 // The route would be the actual folder file so auth.js would be auth/ and then the actual route register
@@ -46,17 +59,6 @@ router.post("/register", async function (req, res, next) {
   }
 });
 
-//Put these credentials in your register route in postman
-// {
-//    "username" : "Johnny",
-//    "password": "password",
-//    "first_name": "Juan",
-//    "last_name": "Cruz",
-//    "phone": "917-243-6675"
-// }
 
-// {
-//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTYzMDY2Mn0.505vknfXRFJEs29acObFNvKA28K_Sk4DSpzlylUX4ac"
-// }
 
 module.exports = router;
