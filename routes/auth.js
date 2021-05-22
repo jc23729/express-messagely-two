@@ -38,11 +38,35 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-
 //token to be used in insomnia
 // {
 //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTcwNzYwM30.HfnE_D-U9Gy8SwDwDuI91hZOcskwCii1im00515htvc"
 // }
+
+//route taking from VideoCode and notes
+
+/** Secret-1 route than only users can access */
+
+router.get("/secret-1", async function (req, res, next) {
+  try {
+    // try to get the token out of the body
+    const tokenFromBody = req.body._token;
+
+    // verify this was a token signed with OUR secret key, if we find it
+    // (jwt.verify raises error if not) we pass in the token and the SECRET_KEY we used
+    //if we need access to that data, this would be the actual payload
+    const data = jwt.verify(tokenFromBody, SECRET_KEY);
+
+    return res.json({ message: "Made it!" });
+  }
+
+  catch (err) {
+    return next({ status: 401, message: "Unauthorized" });
+  }
+});
+
+
+
 
 
 /////////////////////////////////////// Using JWTs in Express////////////////////////
