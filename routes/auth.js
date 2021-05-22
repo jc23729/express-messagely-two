@@ -64,7 +64,8 @@ router.post("/login", async function (req, res, next) {
 
 router.post("/register", async function (req, res, next) {
     try {
-      //{ username } is dynamic    "username" : "Johnny",
+      //{ username } is dynamic    "username" : "Johnny", await User is class in users.js in models/users.js
+        // its pulling this information {username, password, first_name, last_name, phone;}
       let { username } = await User.register(req.body);
       let token = jwt.sign({ username }, SECRET_KEY);
       User.updateLoginTimestamp(username);
@@ -74,6 +75,27 @@ router.post("/register", async function (req, res, next) {
   }
 });
 
+//MODELS/users.js
+// class User {
+//   /** register new user -- returns
+//    *    {username, password, first_name, last_name, phone}
+//    */
 
+//   static async register({ username, password, first_name, last_name, phone }) {
+//     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+//     const result = await db.query(
+//       `INSERT INTO users (
+//               username,
+//               password,
+//               first_name,
+//               last_name,
+//               phone,
+//               join_at,
+//               last_login_at)
+//             VALUES ($1, $2, $3, $4, $5, current_timestamp, current_timestamp)
+//             RETURNING username, password, first_name, last_name, phone`,
+//       [username, hashedPassword, first_name, last_name, phone]
+//     );
+//     return result.rows[0];
 
 module.exports = router;
