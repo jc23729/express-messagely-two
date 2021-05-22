@@ -66,14 +66,15 @@ router.post("/register", async function (req, res, next) {
     // its pulling this information {username, password, first_name, last_name, phone;} and waiting to make sure that the user is registered
     //if not then it catches that error and moves on
     let { username } = await User.register(req.body);
-    let token = jwt.sign({ username }, SECRET_KEY);
+    //Signature: version of header & payload, signed with secret key
+      let token = jwt.sign({ username }, SECRET_KEY);
+      //models/users.js/updateLoginTimeStamp is a function in users.js
     User.updateLoginTimestamp(username);
     return res.json({ token });
   } catch (err) {
     return next(err);
   }
 });
-
 
 //MODELS/users.js
 // class User {
@@ -97,5 +98,26 @@ router.post("/register", async function (req, res, next) {
 //       [username, hashedPassword, first_name, last_name, phone]
 //     );
 //     return result.rows[0];
+
+
+
+
+/** Update last_login_at for user */
+
+
+
+//   static async updateLoginTimestamp(username) {
+//     const result = await db.query(
+//       `UPDATE users
+//            SET last_login_at = current_timestamp
+//            WHERE username = $1
+//            RETURNING username`,
+//       [username]
+//     );
+
+//     if (!result.rows[0]) {
+//       throw new ExpressError(`No such user: ${username}`, 404);
+//     }
+//   }
 
 module.exports = router;
