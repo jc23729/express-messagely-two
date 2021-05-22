@@ -67,9 +67,11 @@ router.post("/register", async function (req, res, next) {
     //if not then it catches that error and moves on
     let { username } = await User.register(req.body);
     //Signature: version of header & payload, signed with secret key
-      let token = jwt.sign({ username }, SECRET_KEY);
-      //models/users.js/updateLoginTimeStamp is a function in users.js
+    let token = jwt.sign({ username }, SECRET_KEY);
+    //models/users.js/updateLoginTimeStamp is a function in users.js
     User.updateLoginTimestamp(username);
+    //   this returns our token =  let = token = jwt.sign({ username }, SECRET_KEY);
+    // The return is used to stop execution. It is often used to do some form of early return based on a condition.
     return res.json({ token });
   } catch (err) {
     return next(err);
@@ -99,12 +101,7 @@ router.post("/register", async function (req, res, next) {
 //     );
 //     return result.rows[0];
 
-
-
-
 /** Update last_login_at for user */
-
-
 
 //   static async updateLoginTimestamp(username) {
 //     const result = await db.query(
