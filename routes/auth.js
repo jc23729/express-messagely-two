@@ -8,6 +8,10 @@ const ExpressError = require("../expressError");
 
 /** login: {username, password} => {token} */
 
+//  http://localhost:3000/auth/login
+// This format in insomnia will give us a token then log us in {username, password} => {token}
+
+
 router.post("/login", async function (req, res, next) {
   try {
     let { username, password } = req.body;
