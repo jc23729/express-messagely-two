@@ -39,7 +39,7 @@ router.post("/login", async function (req, res, next) {
 });
 
 /////////////////////////////////////// Using JWTs in Express////////////////////////
-// Login
+// Login Route from VideoCode and also notes
 // demo / auth - api / routes / auth.js
 
 /** (Fixed) Login: returns JWT on success. */
