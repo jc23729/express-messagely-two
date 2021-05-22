@@ -78,6 +78,8 @@ router.post("/register", async function (req, res, next) {
   }
 });
 
+
+////////////////////MODELS///////////////////////////////////
 //MODELS/users.js
 // class User {
 //   /** register new user -- returns
@@ -101,6 +103,7 @@ router.post("/register", async function (req, res, next) {
 //     );
 //     return result.rows[0];
 
+//Class      models/users.js/updateLoginTimestamp
 /** Update last_login_at for user */
 
 //   static async updateLoginTimestamp(username) {
