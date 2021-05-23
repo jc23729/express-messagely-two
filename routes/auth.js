@@ -79,6 +79,14 @@ router.get("/secret-1", async function (req, res, next) {
   }
 });
 
+
+
+
+
+
+
+
+
 //////////////////////////////////////Route Showing middleware function ensureLoggedIn in middleware/auth.js/////////////////////////////////
 //So basically your doing the same thing you did in router.get("/secret-1") but using middleware from
 // function authenticateJWT(req, res, next)

@@ -46,7 +46,7 @@ function authenticateJWT(req, res, next) {
 function ensureLoggedIn(req, res, next) {
   //check if there is no user, then throw error with message "You are not authorized"
   if (!req.user) {
-    return next({ status: 401, message: "Your are not Unauthorized" });
+    return next({ status: 401, message: "Your are not Unauthorized ensuredLoggedIn middleware" });
   } else {
     return next();
   }
