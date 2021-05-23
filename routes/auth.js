@@ -84,7 +84,7 @@ router.get("/secret-1", async function (req, res, next) {
 // function authenticateJWT(req, res, next)
 // function ensureLoggedIn(req, res, next)
 
-router.get("/topsecret", ensureLoggedIn, async function (req, res, next) {
+router.get("/topsecretmiddleware", ensureLoggedIn, async function (req, res, next) {
   try {
     return res.json({
       msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY",
