@@ -12,7 +12,8 @@ class User {
   /** register new user -- returns
    *    {username, password, first_name, last_name, phone}
    */
-
+  //so we make this async becasue we want the app to make sure we register first before we login
+  //we pass in those parameters {username, password, first_name, last_name, phone}
   static async register({ username, password, first_name, last_name, phone }) {
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const result = await db.query(
