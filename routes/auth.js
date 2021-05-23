@@ -90,9 +90,25 @@ router.get("/topsecret", ensureLoggedIn, async function (req, res, next) {
       msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY",
     });
   } catch (e) {
+      //using ExpressError middleware from expressError.js shown below
     return next(new ExpressError("Please login first fool!", 401));
   }
 });
+
+
+//
+// class ExpressError extends Error {
+//   constructor(message, status) {
+//     super();
+//     this.message = message;
+//     this.status = status;
+//     console.error(this.stack);
+//   }
+// }
+
+
+
+
 
 /////////////////////////////////////// Using JWTs in Express////////////////////////
 // Login Route from VideoCode and also notes
