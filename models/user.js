@@ -32,6 +32,7 @@ class User {
             RETURNING username, password, first_name, last_name, phone`,
       [username, hashedPassword, first_name, last_name, phone]
     );
+    //return the result at index 0, so the first row
     return result.rows[0];
   }
 
