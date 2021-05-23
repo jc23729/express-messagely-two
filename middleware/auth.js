@@ -23,6 +23,12 @@ const { SECRET_KEY } = require("../config");
 
 /** Middleware: Authenticate user. */
 
+
+// its going to look for a token, verify it, 
+// add the payload into the request itself on req.user.On every single route will have access to req.user.
+// If theres nothing in req.user then that means it wasn’t verifed
+
+
 function authenticateJWT(req, res, next) {
   try {
     const tokenFromBody = req.body._token; //we take the req.body._token  and verify it 
