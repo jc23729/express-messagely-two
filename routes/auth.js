@@ -23,7 +23,6 @@ const { ensureLoggedIn } = require("../middleware/auth");
 //    "phone": "917-243-6675"
 // }
 
-
 ///////////////////JWT Commands////////////////////////////////
 // Decoding / Verifying Tokens
 // jwt.decode(token)
@@ -80,27 +79,21 @@ router.get("/secret-1", async function (req, res, next) {
   }
 });
 
-
 //////////////////////////////////////Route Showing middleware function ensureLoggedIn in middleware/auth.js/////////////////////////////////
-//So basically your doing the same thing you did in router.get("/secret-1") but using middleware from 
+//So basically your doing the same thing you did in router.get("/secret-1") but using middleware from
 // function authenticateJWT(req, res, next)
 // function ensureLoggedIn(req, res, next)
 
 router.get("/topsecret", ensureLoggedIn, async function (req, res, next) {
-    try {
-        return res.json({msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY"})
-    } catch (e) {
-        return next(new ExpressError("Please login first fool!", 401))
-    }
-})
-    
-    
-    
-    
-    
-    
-    
-    
+  try {
+    return res.json({
+      msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY",
+    });
+  } catch (e) {
+    return next(new ExpressError("Please login first fool!", 401));
+  }
+});
+
 /////////////////////////////////////// Using JWTs in Express////////////////////////
 // Login Route from VideoCode and also notes
 // demo / auth - api / routes / auth.js
