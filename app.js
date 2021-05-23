@@ -3,6 +3,7 @@
 
 const express = require("express");
 const cors = require("cors");
+//We import this from middleware/auth.js
 const { authenticateJWT } = require("./middleware/auth");
 
 const ExpressError = require("./expressError")
@@ -15,7 +16,7 @@ app.use(express.urlencoded({extended: true}));
 // allow connections to all routes from any browser
 app.use(cors());
 
-// get auth token for all routes
+// get auth token for all routes this will actually run on every single route, where you put it matters
 app.use(authenticateJWT);
 
 /** routes */
