@@ -31,12 +31,12 @@ const { SECRET_KEY } = require("../config");
 
 function authenticateJWT(req, res, next) {
   try {
-    const tokenFromBody = req.body._token; //we take the req.body._token  and verify it 
-    const payload = jwt.verify(tokenFromBody, SECRET_KEY);//if token is verified this token will return the actual data in that token
-    req.user = payload; // create a current user we add it to req.user, every single handler will have access to req.user
-    console.log("YEYY YOU HAVE A VALID TOKEN!")
+    const tokenFromBody = req.body._token; //we look for the req.body._token set it to variable to use later
+    const payload = jwt.verify(tokenFromBody, SECRET_KEY); //its going to verfiy the token, add it to the payload
+    req.user = payload; //We set the payload equal to req.user. Now On every single route will have access to req.user.
+    console.log("YEYY YOU HAVE A VALID TOKEN!");
     return next();
-  } catch (err) {//if it doesn't work it catches that error 
+  } catch (err) {//If theres nothing in req.user then that means it wasn’t verifed then moves on
     return next();
   }
 }
