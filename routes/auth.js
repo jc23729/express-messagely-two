@@ -82,24 +82,25 @@ router.get("/secret-1", async function (req, res, next) {
 
 
 //////////////////////////////////////Route Showing middleware function ensureLoggedIn in middleware/auth.js/////////////////////////////////
-router.get("/secret-2", async function (req, res, next) {
-  try {
-    // try to get the token out of the body W
-    const tokenFromBody = req.body._token;
+//So basically your doing the same thing you did in router.get("/secret-1") but using middleware from 
+// function authenticateJWT(req, res, next)
+// function ensureLoggedIn(req, res, next)
 
-    // verify this was a token signed with OUR secret key, if we find it
-    // (jwt.verify raises error if not) we pass in the token and the SECRET_KEY we used
-    //if we need access to that data(const data= ), this would be the actual payload/jwt.verify is part of json webtokens
-    const data = jwt.verify(tokenFromBody, SECRET_KEY);
-
-    return res.json({
-      message: "I mangaged to sing in this is Top Secret, I LIKE RED!",
-    });
-  } catch (err) {
-    return next({ status: 401, message: "Unauthorized" });
-  }
-});
-
+router.get("/topsecret", ensureLoggedIn, async function (req, res, next) {
+    try {
+        return res.json({msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY"})
+    } catch (e) {
+        return next(new ExpressError("Please login first fool!", 401))
+    }
+})
+    
+    
+    
+    
+    
+    
+    
+    
 /////////////////////////////////////// Using JWTs in Express////////////////////////
 // Login Route from VideoCode and also notes
 // demo / auth - api / routes / auth.js
