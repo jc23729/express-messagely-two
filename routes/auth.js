@@ -39,9 +39,13 @@ const { ensureLoggedIn } = require("../middleware/auth");
 router.post("/login", async function (req, res, next) {
   try {
     let { username, password } = req.body;
+    //await User.authenticate is passed in from our models/users.js
+    //Checks to see if the user is authenticated in our user class
     if (await User.authenticate(username, password)) {
       //we pass in some payload and use a secret key which is in our config.js file const SECRET_KEY = process.env.SECRET_KEY || "secret";
       let token = jwt.sign({ username }, SECRET_KEY);
+      //we pass in updateLoginTimestamp from models/user.js/User/updateLoginTimestamp
+      //also dont forget that username is set to let { username, password } = req.body; which we pass through insomnia
       User.updateLoginTimestamp(username);
       return res.json({ token });
     } else {
@@ -79,30 +83,25 @@ router.get("/secret-1", async function (req, res, next) {
   }
 });
 
-
-
-
-
-
-
-
-
 //////////////////////////////////////Route Showing middleware function ensureLoggedIn in middleware/auth.js/////////////////////////////////
 //So basically your doing the same thing you did in router.get("/secret-1") but using middleware from
 // function authenticateJWT(req, res, next)
 // function ensureLoggedIn(req, res, next)
 
-router.get("/topsecretmiddleware", ensureLoggedIn, async function (req, res, next) {
-  try {
-    return res.json({
-      msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY",
-    });
-  } catch (e) {
+router.get(
+  "/topsecretmiddleware",
+  ensureLoggedIn,
+  async function (req, res, next) {
+    try {
+      return res.json({
+        msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY",
+      });
+    } catch (e) {
       //using ExpressError middleware from expressError.js, just sets up a constructor/frame were its your message and error code
-    return next(new ExpressError("Please login first fool!", 401));
+      return next(new ExpressError("Please login first fool!", 401));
+    }
   }
-});
-
+);
 
 //ExpressError.js
 // class ExpressError extends Error {
@@ -113,10 +112,6 @@ router.get("/topsecretmiddleware", ensureLoggedIn, async function (req, res, nex
 //     console.error(this.stack);
 //   }
 // }
-
-
-
-
 
 /////////////////////////////////////// Using JWTs in Express////////////////////////
 // Login Route from VideoCode and also notes

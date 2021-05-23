@@ -18,7 +18,7 @@ class User {
     //so we let bcrypt hash the password, given when registgering and set that to a variable let hashedPassword
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     //we await db.query, so basically we ask for information from the database and INSERT INTO our database
-    //then but it into a array 
+    //then but it into a array
     const result = await db.query(
       `INSERT INTO users (
               username,
@@ -37,7 +37,7 @@ class User {
   }
 
   /** Authenticate: is this username/password valid? Returns boolean. */
-
+  //So we setup the class and pass authenticate into the routes/auth.js
   static async authenticate(username, password) {
     //same thing query the database and select passwords FROM users in the database
     const result = await db.query(
@@ -50,6 +50,8 @@ class User {
     return user && (await bcrypt.compare(password, user.password));
   }
 
+
+  
   /** Update last_login_at for user */
 
   static async updateLoginTimestamp(username) {
