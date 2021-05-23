@@ -39,12 +39,14 @@ class User {
   /** Authenticate: is this username/password valid? Returns boolean. */
 
   static async authenticate(username, password) {
+    //same thing query the database and select passwords FROM users in the database
     const result = await db.query(
       "SELECT password FROM users WHERE username = $1",
       [username]
     );
     let user = result.rows[0];
-
+    //return that user but wait for bcrypt to compare the actual password from what the class User, at password registered with
+    //Mind you its checking in the function or class User we made
     return user && (await bcrypt.compare(password, user.password));
   }
 
