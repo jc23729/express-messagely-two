@@ -90,13 +90,13 @@ router.get("/topsecret", ensureLoggedIn, async function (req, res, next) {
       msg: "SIGNED IN! THIS IS TOP SECRET, BUT REALLY NOT REALLY",
     });
   } catch (e) {
-      //using ExpressError middleware from expressError.js shown below
+      //using ExpressError middleware from expressError.js, just sets up a constructor/frame were its your message and error code
     return next(new ExpressError("Please login first fool!", 401));
   }
 });
 
 
-//
+//ExpressError.js
 // class ExpressError extends Error {
 //   constructor(message, status) {
 //     super();
