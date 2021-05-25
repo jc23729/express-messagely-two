@@ -14,8 +14,9 @@ const router = new Router();
 //ensureLoggedIn is checking to make sure that person is logged in
 router.get("/"), ensureLoggedIn, async function (req, res, next) {
     try {
-        //
+        //User.all is pulling form models/users.js/class User/ static async all
         let users = await User.all();
+        //and this returns that query in json format
         return res.json({ users });
     }
     catch (err) {
