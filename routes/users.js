@@ -12,6 +12,30 @@ const router = new Router();
  *
  **/
 
+router.get("/"), ensureLoggedIn, async function (req, res, next) {
+    try {
+        let users = await User.all();
+    }
+}
+
+  /** All: basic info on all users:
+   * [{username, first_name, last_name}, ...] */
+
+//   static async all() {
+//     const result = await db.query(
+//       `SELECT username,
+//                 first_name,
+//                 last_name,
+//                 phone
+//             FROM users
+//             ORDER BY username`
+//     );
+
+//     return result.rows;
+//   }
+
+
+
 
 /** GET /:username - get detail of users.
  *
