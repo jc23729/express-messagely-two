@@ -1,5 +1,5 @@
 const Router = require("express").Router;
-const User = ("../models/user");
+const User = require ("../models/user");
 const { ensureLoggedIn } = require("../middleware/auth");
 
 const router = new Router();
@@ -12,7 +12,7 @@ const router = new Router();
  *
  **/
 //ensureLoggedIn is checking to make sure that person is logged in
-router.get("/"), ensureLoggedIn, async function (req, res, next) {
+router.get("/", ensureLoggedIn, async function (req, res, next) {
     try {
         //User.all is pulling form models/users.js/class User/ static async all
         let users = await User.all();
@@ -22,7 +22,7 @@ router.get("/"), ensureLoggedIn, async function (req, res, next) {
     catch (err) {
         return next(err);
     }
-}
+});
 
   /** All: basic info on all users:
    * [{username, first_name, last_name}, ...] */
