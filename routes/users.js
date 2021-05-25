@@ -15,6 +15,10 @@ const router = new Router();
 router.get("/"), ensureLoggedIn, async function (req, res, next) {
     try {
         let users = await User.all();
+        return res.json({ users });
+    }
+    catch (err) {
+        return next(err);
     }
 }
 
