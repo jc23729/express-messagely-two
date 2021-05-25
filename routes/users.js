@@ -44,12 +44,12 @@ router.get("/", ensureLoggedIn, async function (req, res, next) {
  * => {user: {username, first_name, last_name, phone, join_at, last_login_at}}
  *
  **/
-router.get("/username", ensureLoggedIn, async function (req, res, next) {
+router.get("/:username", ensureLoggedIn, async function (req, res, next) {
   try {
     //User.all is pulling form models/users.js/class User/ static async all
-      let username = await User.get();
+      let user= await User.get(req.params.username);
     //and this returns that query in json format
-    return res.json({ username });
+    return res.json({ user });
   } catch (err) {
     return next(err);
   }
