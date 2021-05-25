@@ -1,6 +1,6 @@
 const Router = require("express").Router;
 const User = ("../models/user");
-const { ensuredLoggedIn } = require("../middleware/auth");
+const { ensureLoggedIn } = require("../middleware/auth");
 
 const router = new Router();
 
@@ -70,3 +70,6 @@ router.get("/"), ensureLoggedIn, async function (req, res, next) {
  *                 to_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
+
+
+module.exports = router;
