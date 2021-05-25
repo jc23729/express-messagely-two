@@ -11,9 +11,10 @@ const router = new Router();
  * => {users: [{username, first_name, last_name, phone}, ...]}
  *
  **/
-
+//ensureLoggedIn is checking to make sure that person is logged in
 router.get("/"), ensureLoggedIn, async function (req, res, next) {
     try {
+        //
         let users = await User.all();
         return res.json({ users });
     }
