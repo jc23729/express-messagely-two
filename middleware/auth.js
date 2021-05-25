@@ -59,7 +59,7 @@ function ensureCorrectUser(req, res, next) {
     if (req.user.username === req.params.username) {
       return next();
     } else {
-      return next({ status: 401, message: "Unauthorized" });
+      return next({ status: 401, message: "Incorrect Username, Unauthorized" });
     }
   } catch (err) {
     // errors would happen here if we made a request and req.user is undefined
