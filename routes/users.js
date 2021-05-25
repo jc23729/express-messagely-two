@@ -1,10 +1,8 @@
 const Router = require("express").Router;
-const User = require ("../models/user");
+const User = require("../models/user");
 const { ensureLoggedIn } = require("../middleware/auth");
 
 const router = new Router();
-
-
 
 /** GET / - get list of users.
  *
@@ -13,19 +11,18 @@ const router = new Router();
  **/
 //ensureLoggedIn is checking to make sure that person is logged in
 router.get("/", ensureLoggedIn, async function (req, res, next) {
-    try {
-        //User.all is pulling form models/users.js/class User/ static async all
-        let users = await User.all();
-        //and this returns that query in json format
-        return res.json({ users });
-    }
-    catch (err) {
-        return next(err);
-    }
+  try {
+    //User.all is pulling form models/users.js/class User/ static async all
+    let users = await User.all();
+    //and this returns that query in json format
+    return res.json({ users });
+  } catch (err) {
+    return next(err);
+  }
 });
-
-  /** All: basic info on all users:
-   * [{username, first_name, last_name}, ...] */
+//User.all is pulling form models/users.js/class User/ static async all
+/** All: basic info on all users:
+ * [{username, first_name, last_name}, ...] */
 
 //   static async all() {
 //     const result = await db.query(
@@ -42,12 +39,54 @@ router.get("/", ensureLoggedIn, async function (req, res, next) {
 
 
 
-
 /** GET /:username - get detail of users.
  *
  * => {user: {username, first_name, last_name, phone, join_at, last_login_at}}
  *
  **/
+router.get("/username", ensureLoggedIn, async function (req, res, next) {
+  try {
+    //User.all is pulling form models/users.js/class User/ static async all
+      let username = await User.get();
+    //and this returns that query in json format
+    return res.json({ username });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
+//We're pulling from models/user/static async get(username)
+//  /** Get: get user by username
+//    *
+//    * returns {username,
+//    *          first_name,
+//    *          last_name,
+//    *          phone,
+//    *          join_at,
+//    *          last_login_at } */
+
+//   static async get(username) {
+//     const result = await db.query(
+//       `SELECT username,
+//                 first_name,
+//                 last_name,
+//                 phone,
+//                 join_at,
+//                 last_login_at
+//             FROM users
+//             WHERE username = $1`,
+//       [username]
+//     );
+
+//     if (!result.rows[0]) {
+//       throw new ExpressError(`No such user: ${username}`, 404);
+//     }
+
+//     return result.rows[0];
+//   }
+
+
 
 
 /** GET /:username/to - get messages to user
@@ -60,7 +99,6 @@ router.get("/", ensureLoggedIn, async function (req, res, next) {
  *
  **/
 
-
 /** GET /:username/from - get messages from user
  *
  * => {messages: [{id,
@@ -70,6 +108,5 @@ router.get("/", ensureLoggedIn, async function (req, res, next) {
  *                 to_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
-
 
 module.exports = router;
