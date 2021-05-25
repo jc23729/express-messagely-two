@@ -12,7 +12,7 @@ const router = new Router();
  *
  **/
 //ensureLoggedIn is checking to make sure that person is logged in
-router.get("/home"), ensureLoggedIn, async function (req, res, next) {
+router.get("/"), ensureLoggedIn, async function (req, res, next) {
     try {
         //User.all is pulling form models/users.js/class User/ static async all
         let users = await User.all();
