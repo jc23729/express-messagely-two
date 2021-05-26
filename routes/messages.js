@@ -25,7 +25,6 @@ const ExpressError = require("../expressError");
 
 // So remember each route was connected to app in app.js. The url that shows in app.js for example --> in app.use("/messages", messageRoutes) is what you need
 
-
 // So in this case  -------- localhost:3000/messages/1   ---------    is what you need. And then /id  or whatever id your looking for
 //////////////////////////WIll return this
 // //{
@@ -75,7 +74,6 @@ router.get("/:id", ensureLoggedIn, async function (req, res, next) {
  * Make sure that the currently-logged-in users is either the to or from user.
  *
  **/
-
 
 // So, it would be a POST request to this path:
 
