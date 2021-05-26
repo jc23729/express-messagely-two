@@ -76,6 +76,22 @@ router.get("/:id", ensureLoggedIn, async function (req, res, next) {
  *
  **/
 
+
+// So, it would be a POST request to this path:
+
+// http://127.0.0.1:3000/messages
+
+// And you would send JSON data with this structure, to correspond to the req.body.* data that the /messages POST route expects (and also to pass in the authentication _token):
+
+// {
+// "to_username": "Johnny",
+// "body": "Message content.",
+// "_token": "token-of-the-sender-user-goes-here"
+// }
+
+// Where Johnny would be the username of the user receiving the message - "to_username"
+// And "body" would be the message content
+
 router.post("/", ensureLoggedIn, async function (req, res, next) {
   try {
     let msg = await Message.create({
@@ -97,6 +113,9 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
  * Make sure that the only the intended recipient can mark as read.
  *
  **/
+
+
+
 
 router.post("/:id/read", ensureLoggedIn, async function (req, res, next) {
   try {
