@@ -115,7 +115,7 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
  **/
 
 //localhost:3000/messages/1/read  on the route path
-
+//You get back this as a timestamp basically
 
 // {
 //   "message": {
