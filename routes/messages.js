@@ -114,10 +114,9 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
  *
  **/
 
+//localhost:3000/messages/1/read 
 
-
-
-router.post("/:id/read", ensureLoggedIn, async function (req, res, next) {
+http: router.post("/:id/read", ensureLoggedIn, async function (req, res, next) {
   try {
     let username = req.user.username;
     let msg = await Message.get(req.params.id);
