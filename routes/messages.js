@@ -18,6 +18,37 @@ const ExpressError = require("../expressError");
  *
  **/
 
+// You put the token in of the person that is the user
+// {
+//   "_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG5ueSIsImlhdCI6MTYyMTYzMDY2Mn0.505vknfXRFJEs29acObFNvKA28K_Sk4DSpzlylUX4ac"
+// }
+
+// So remember each route was connected to app in app.js. The url that shows in app.js for example --> in app.use("/messages", messageRoutes) is what you need
+
+
+// So in this case  -------- localhost:3000/messages/1   ---------    is what you need. And then /id  or whatever id your looking for
+//////////////////////////WIll return this
+// //{
+//   "message": {
+//     "id": 1,
+//     "from_user": {
+//       "username": "Christina23",
+//       "first_name": "Christina",
+//       "last_name": "Serrano",
+//       "phone": "914-609-2550"
+//     },
+//     "to_user": {
+//       "username": "Johnny",
+//       "first_name": "Juan",
+//       "last_name": "Cruz",
+//       "phone": "917-243-6675"
+//     },
+//     "body": "This message is from Christina to Johnny",
+//     "sent_at": "2021-05-26T21:38:33.072Z",
+//     "read_at": "2021-05-26T23:16:16.418Z"
+//   }
+// }
+
 router.get("/:id", ensureLoggedIn, async function (req, res, next) {
   try {
     let username = req.user.username;
