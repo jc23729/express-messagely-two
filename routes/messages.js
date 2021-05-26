@@ -114,7 +114,15 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
  *
  **/
 
-//localhost:3000/messages/1/read 
+//localhost:3000/messages/1/read  on the route path
+
+
+// {
+//   "message": {
+//     "id": 1,
+//     "read_at": "2021-05-26T23:29:31.504Z"
+//   }
+// }
 
 http: router.post("/:id/read", ensureLoggedIn, async function (req, res, next) {
   try {
